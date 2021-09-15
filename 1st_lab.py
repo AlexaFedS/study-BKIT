@@ -43,18 +43,44 @@ def get_roots(a, b, c):
     D = b * b - 4 * a * c
     if D == 0.0:
         root = -b / (2.0 * a)
-        root = math.sqrt(root)
-        result.append(root)
+        if root > 0:
+        	root1 = math.sqrt(root)
+        	root2 = -1 * math.sqrt(root)
+        	result.append(root1)
+        	result.append(root2)
+        elif root == 0:
+            results.append(root)
     elif D > 0.0:
         sqD = math.sqrt(D)
         root1 = (-b + sqD) / (2.0 * a)
-        if root1 >= 0:
-            root1 = math.sqrt(root1)
+        if root1 > 0:
+            rooter1 = math.sqrt(root1)
+            rooter2 = -1 * math.sqrt(root1)
+            result.append(rooter1)
+            result.append(rooter2)
+        elif root1 ==0:
             result.append(root1)
         root2 = (-b - sqD) / (2.0 * a)
-        if root2 >= 0:
-            root2 = math.sqrt(root2)
+        if root2 > 0:
+            rooter1 = math.sqrt(root2)
+            rooter2 = -1 * math.sqrt(root2)
+            result.append(rooter1)
+            result.append(rooter2)
+        elif root2 ==0:
             result.append(root2)
+    return result
+    
+def linar(b,c):
+    result = []
+    root = 0.0
+    root = -1 * c / b
+    if root > 0:
+    	root1 = math.sqrt(root)
+    	root2 = -1 * math.sqrt(root)
+    	result.append(root1)
+    	result.append(root2)
+    elif root == 0:
+    	result.append(root)
     return result
 
 
@@ -65,8 +91,20 @@ def main():
     a = get_coef(1, 'Введите коэффициент А:')
     b = get_coef(2, 'Введите коэффициент B:')
     c = get_coef(3, 'Введите коэффициент C:')
+    roots =[]
+    if a == 0:
+    	if c ==0:
+    	    if b ==0:
+    	    	roots = [3,3,3,3,3]
+    	    else:
+    	    	roots = 0
+    	elif b ==0:
+    	    roots = []
+    	else:
+    	    roots = linar(b, c)
     # Вычисление корней
-    roots = get_roots(a, b, c)
+    else:
+        roots = get_roots(a, b, c)
     # Вывод корней
     len_roots = len(roots)
     if len_roots == 0:
@@ -75,6 +113,12 @@ def main():
         print('Один корень: {}'.format(roots[0]))
     elif len_roots == 2:
         print('Два корня: {} и {}'.format(roots[0], roots[1]))
+    elif len_roots == 3:
+        print('Три корня: {} , {} и {}'.format(roots[0], roots[1], roots[2]))
+    elif len_roots == 4:
+        print('Четыре корня: {} , {} , {} и {}'.format(roots[0], roots[1], roots[2], roots[3]))
+    elif len_roots == 5:
+        print('х - любое число')
 
 
 # Если сценарий запущен из командной строки
